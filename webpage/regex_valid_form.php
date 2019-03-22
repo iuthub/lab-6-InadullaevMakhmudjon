@@ -63,6 +63,10 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 			<dd><input type="text" name="stringline" value="<?= $stringline ?>"></dd>
 			<span class="output"><?= (strlen($stringline) > 0)? str_replace('\n', '', $stringline):"" ?></span>
 
+			<dt>Enter text with [ and ] parenthesis</dt>
+			<dd><input type="text" name="stringline" value="<?= $stringline ?>"></dd>
+			<span class="output"><?= (strlen($stringline) > 0)? str_replace('\n', '', $stringline):"" ?></span>
+
 			<dd><input type="submit" value="Check"></dd>
 		</dl>
 
