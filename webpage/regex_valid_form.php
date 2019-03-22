@@ -3,6 +3,7 @@
 	$emailText="";
 	$phoneText="";
 	$string="";
+	$stringline="";
 
 	$isErrorQuick=false;
 	$isErrorEmail=false;
@@ -13,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 	$emailText = $_POST["email"];
 	$phoneText = $_POST["phone"];
 	$string = $_POST["string"];
+	$stringline=$_POST["stringline"];
 
 	$isErrorQuick = !preg_match('/(quick)/', $quickText);
 	$isErrorEmail = !preg_match('/^([a-zA-Z0-9])+@[a-z]+\.[a-z]/', $emailText);
@@ -37,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
       }
     </style>
 </head>
+
 <body>
 	<form action="regex_valid_form.php" method="post">
 		<dl>
@@ -56,9 +59,14 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 			<dd><input type="text" name="string" value="<?= $string ?>"></dd>
 			<span class="output"><?= (strlen($string) > 0)? str_replace(' ', '', $string):"" ?></span>
 
+			<dt>Enter text.(for new line \n)</dt>
+			<dd><input type="text" name="stringline" value="<?= $stringline ?>"></dd>
+			<span class="output"><?= (strlen($stringline) > 0)? str_replace('\n', '', $stringline):"" ?></span>
+
 			<dd><input type="submit" value="Check"></dd>
 		</dl>
 
 	</form>
 </body>
+
 </html>
