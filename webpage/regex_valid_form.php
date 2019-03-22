@@ -1,20 +1,17 @@
 <?php
+	$quickText = "";
+	$emailText="";
 
-	$pattern="";
-	$text="";
-	$replaceText="";
-
-	$match="Not checked yet.";
+	$isErrorQuick=false;
+	$isErrorEmail=false;
 
 if ($_SERVER["REQUEST_METHOD"]=="POST") {
-	$pattern=$_POST["pattern"];
-	$text=$_POST["text"];
+	$quickText=$_POST["quick"];
+	$emailText = $_POST["email"];
 
-	if(preg_match($pattern, $text)) {
-						$match="Match!";
-					} else {
-						$match="Does not match!";
-					}
+	$isErrorQuick = !preg_match('/(quick)/', $quickText);
+	$isErrorEmail = !preg_match('/^([a-zA-Z0-9])+@[a-z]+\.[a-z]/', $emailText);
+
 }
 
 ?>
@@ -25,23 +22,23 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 <head>
 	<meta charset="UTF-8">
 	<title>Valid Form</title>
+	    <style media="screen">
+      .error {
+        color: red;
+      }
+    </style>
 </head>
 <body>
 	<form action="regex_valid_form.php" method="post">
 		<dl>
-			<dt>Pattern</dt>
-			<dd><input type="text" name="pattern" value="<?= $pattern ?>"></dd>
+			<dt>Text which contains word ’quick’. </dt>
+			<span class="error"><?= $isErrorQuick? "Please include word 'quick' ":"" ?></span>
+			<dd><input type="text" name="quick" value="<?= $quickText ?>"></dd>
 
-			<dt>Text</dt>
-			<dd><input type="text" name="text" value="<?= $text ?>"></dd>
+			<dt>Email. </dt>
+			<span class="error"><?= $isErrorEmail? "Please enter Email address correctly":"" ?></span>
+			<dd><input type="text" name="email" value="<?= $emailText ?>"></dd>
 
-			<dt>Replace Text</dt>
-			<dd><input type="text" name="replaceText" value="<?= $replaceText ?>"></dd>
-
-			<dt>Output Text</dt>
-			<dd><?=	$match ?></dd>
-
-			<dt>&nbsp;</dt>
 			<dd><input type="submit" value="Check"></dd>
 		</dl>
 
