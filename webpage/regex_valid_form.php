@@ -1,16 +1,22 @@
 <?php
 	$quickText = "";
 	$emailText="";
+	$phoneText="";
 
 	$isErrorQuick=false;
 	$isErrorEmail=false;
+	$isErrorPhone=false;
 
 if ($_SERVER["REQUEST_METHOD"]=="POST") {
 	$quickText=$_POST["quick"];
 	$emailText = $_POST["email"];
+	$phoneText = $_POST["phone"];
 
 	$isErrorQuick = !preg_match('/(quick)/', $quickText);
 	$isErrorEmail = !preg_match('/^([a-zA-Z0-9])+@[a-z]+\.[a-z]/', $emailText);
+	$isErrorPhone = !preg_match('/^(\+998)+\-[0-9]{2}+\-[0-9]{3}+\-[0-9]{4}/', $phoneText);
+
+
 
 }
 
@@ -38,6 +44,10 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 			<dt>Email. </dt>
 			<span class="error"><?= $isErrorEmail? "Please enter Email address correctly":"" ?></span>
 			<dd><input type="text" name="email" value="<?= $emailText ?>"></dd>
+
+		    <dt>Phone.</dt>
+			<span class="error"><?= $isErrorPhone? "Please enter phone format correctly. (+998-##-###-####)":"" ?></span>
+			<dd><input type="text" name="phone" value="<?= $phoneText ?>"></dd>
 
 			<dd><input type="submit" value="Check"></dd>
 		</dl>
